@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs';
 import {FormsModule} from '@angular/forms';
@@ -11,6 +11,7 @@ import {ItemTypeService} from '../../services/item-type-service';
     FormsModule
   ],
   templateUrl: './item-types-edit-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './item-types-edit-component.css'
 })
 export class ItemTypesEditComponent implements OnInit {

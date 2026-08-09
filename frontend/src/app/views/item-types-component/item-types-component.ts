@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {take} from 'rxjs';
 import {ItemType} from '../../relations/item-type';
@@ -10,6 +10,7 @@ import {ItemTypeService} from '../../services/item-type-service';
     RouterLink
   ],
   templateUrl: './item-types-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './item-types-component.css'
 })
 export class ItemTypesComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs';
@@ -11,6 +11,7 @@ import {AllocationService} from '../../services/allocation-service';
     FormsModule
   ],
   templateUrl: './allocations-edit-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './allocations-edit-component.css'
 })
 export class AllocationsEditComponent implements OnInit {

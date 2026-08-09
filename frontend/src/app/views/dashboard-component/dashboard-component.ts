@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CategoryService} from '../../services/category-service';
 import {EntriesCount} from '../../returns/entries-count';
 import {take} from 'rxjs';
@@ -11,6 +11,7 @@ import {TransactionService} from '../../services/transaction-service';
   selector: 'app-dashboard-component',
   imports: [],
   templateUrl: './dashboard-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard-component.css'
 })
 export class DashboardComponent implements OnInit {

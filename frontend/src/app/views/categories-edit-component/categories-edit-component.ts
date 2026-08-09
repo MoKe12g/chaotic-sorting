@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CategoryService} from '../../services/category-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Category} from '../../relations/category';
@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   templateUrl: './categories-edit-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './categories-edit-component.css'
 })
 export class CategoriesEditComponent implements OnInit {

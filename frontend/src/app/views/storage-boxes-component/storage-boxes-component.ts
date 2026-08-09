@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {take} from 'rxjs';
 import {StorageBox} from '../../relations/storage-box';
@@ -10,6 +10,7 @@ import {StorageBoxService} from '../../services/storage-box-service';
     RouterLink
   ],
   templateUrl: './storage-boxes-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './storage-boxes-component.css'
 })
 export class StorageBoxesComponent implements OnInit {

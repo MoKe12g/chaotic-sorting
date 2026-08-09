@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CategoryService} from '../../services/category-service';
 import {Category} from '../../relations/category';
 import {take} from 'rxjs';
@@ -10,6 +10,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
     RouterLink
   ],
   templateUrl: './categories-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './categories-component.css'
 })
 export class CategoriesComponent implements OnInit {

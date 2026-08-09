@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {take} from 'rxjs';
 import {Allocation} from '../../relations/allocation';
@@ -10,6 +10,7 @@ import {AllocationService} from '../../services/allocation-service';
     RouterLink
   ],
   templateUrl: './allocations-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './allocations-component.css'
 })
 export class AllocationsComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs';
@@ -11,6 +11,7 @@ import {StorageBoxService} from '../../services/storage-box-service';
     FormsModule
   ],
   templateUrl: './storage-boxes-edit-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './storage-boxes-edit-component.css'
 })
 export class StorageBoxesEditComponent implements OnInit {

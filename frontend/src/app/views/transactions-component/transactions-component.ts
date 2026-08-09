@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {take} from 'rxjs';
 import {Transaction} from '../../relations/transaction';
@@ -10,6 +10,7 @@ import {TransactionService} from '../../services/transaction-service';
     RouterLink
   ],
   templateUrl: './transactions-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transactions-component.css'
 })
 export class TransactionsComponent implements OnInit {

@@ -1,10 +1,12 @@
 <p>Id "-1" means that the category isn't created yet.</p>
-<br/>
+<br />
 <form>
   <table class="form-group">
     <tr>
       <td><label>Id</label></td>
-      <td><label>{{ category.id }}</label></td>
+      <td>
+        <label>{{ category.id }}</label>
+      </td>
     </tr>
     <tr>
       <td><label>Comment</label></td>
@@ -22,21 +24,25 @@
     </tr>
     <tr>
       <td>
-        <br/>
+        <br />
       </td>
     </tr>
     <tr>
-      <td>@if (category.id == -1) {
-        <button (click)="postCategory()">POST (insert)</button>
-      }</td>
+      <td>
+        @if (category.id == -1) {
+          <button (click)="postCategory()">POST (insert)</button>
+        }
+      </td>
       <td>
         @if (category.id != -1) {
           <button (click)="patchCategory()">PATCH (update)</button>
-        }</td>
+        }
+      </td>
       <td>
         @if (category.id != -1) {
           <button (click)="deleteCategory()">DELETE</button>
-        }</td>
+        }
+      </td>
     </tr>
   </table>
 </form>

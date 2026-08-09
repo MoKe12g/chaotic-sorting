@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {StorageBoxesComponent} from './storage-boxes-component';
+import { StorageBoxesComponent } from './storage-boxes-component';
 
 describe('StorageBoxesComponent', () => {
   let component: StorageBoxesComponent;
@@ -8,9 +8,8 @@ describe('StorageBoxesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StorageBoxesComponent]
-    })
-      .compileComponents();
+      imports: [StorageBoxesComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StorageBoxesComponent);
     component = fixture.componentInstance;

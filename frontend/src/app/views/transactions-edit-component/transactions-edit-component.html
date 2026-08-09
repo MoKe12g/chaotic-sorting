@@ -1,10 +1,12 @@
 <p>Id "-1" means that the transaction isn't created yet.</p>
-<br/>
+<br />
 <form>
   <table class="form-group">
     <tr>
       <td><label>Id</label></td>
-      <td><label>{{ transaction.id }}</label></td>
+      <td>
+        <label>{{ transaction.id }}</label>
+      </td>
     </tr>
     <tr>
       <td><label>Allocation</label></td>
@@ -50,21 +52,25 @@
     </tr>
     <tr>
       <td>
-        <br/>
+        <br />
       </td>
     </tr>
     <tr>
-      <td>@if (transaction.id == -1) {
-        <button (click)="postTransaction()">POST (insert)</button>
-      }</td>
+      <td>
+        @if (transaction.id == -1) {
+          <button (click)="postTransaction()">POST (insert)</button>
+        }
+      </td>
       <td>
         @if (transaction.id != -1) {
           <button (click)="patchTransaction()">PATCH (update)</button>
-        }</td>
+        }
+      </td>
       <td>
         @if (transaction.id != -1) {
           <button (click)="deleteTransaction()">DELETE</button>
-        }</td>
+        }
+      </td>
     </tr>
   </table>
 </form>

@@ -1,4 +1,4 @@
-import {DatabaseRelation} from './database-relation';
+import { DatabaseRelation } from './database-relation';
 
 export interface Allocation extends DatabaseRelation {
   description: string;

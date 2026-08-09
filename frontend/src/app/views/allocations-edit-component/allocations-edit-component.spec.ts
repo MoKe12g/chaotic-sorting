@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {AllocationsEditComponent} from './allocations-edit-component';
+import { AllocationsEditComponent } from './allocations-edit-component';
 
 describe('AllocationsEditComponent', () => {
   let component: AllocationsEditComponent;
@@ -8,9 +8,8 @@ describe('AllocationsEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AllocationsEditComponent]
-    })
-      .compileComponents();
+      imports: [AllocationsEditComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AllocationsEditComponent);
     component = fixture.componentInstance;

@@ -1,10 +1,12 @@
 <p>Id "-1" means that the allocation isn't created yet.</p>
-<br/>
+<br />
 <form>
   <table class="form-group">
     <tr>
       <td><label>Id</label></td>
-      <td><label>{{ allocation.id }}</label></td>
+      <td>
+        <label>{{ allocation.id }}</label>
+      </td>
     </tr>
     <tr>
       <td><label>Description</label></td>
@@ -75,21 +77,25 @@
     </tr>
     <tr>
       <td>
-        <br/>
+        <br />
       </td>
     </tr>
     <tr>
-      <td>@if (allocation.id == -1) {
-        <button (click)="postAllocation()">POST (insert)</button>
-      }</td>
+      <td>
+        @if (allocation.id == -1) {
+          <button (click)="postAllocation()">POST (insert)</button>
+        }
+      </td>
       <td>
         @if (allocation.id != -1) {
           <button (click)="patchAllocation()">PATCH (update)</button>
-        }</td>
+        }
+      </td>
       <td>
         @if (allocation.id != -1) {
           <button (click)="deleteAllocation()">DELETE</button>
-        }</td>
+        }
+      </td>
     </tr>
   </table>
 </form>

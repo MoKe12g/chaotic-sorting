@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {StorageBoxesEditComponent} from './storage-boxes-edit-component';
+import { StorageBoxesEditComponent } from './storage-boxes-edit-component';
 
 describe('StorageBoxesEditComponent', () => {
   let component: StorageBoxesEditComponent;
@@ -8,9 +8,8 @@ describe('StorageBoxesEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StorageBoxesEditComponent]
-    })
-      .compileComponents();
+      imports: [StorageBoxesEditComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StorageBoxesEditComponent);
     component = fixture.componentInstance;

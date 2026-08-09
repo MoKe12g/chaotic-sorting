@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ItemTypesEditComponent} from './item-types-edit-component';
+import { ItemTypesEditComponent } from './item-types-edit-component';
 
 describe('ItemTypesEditComponent', () => {
   let component: ItemTypesEditComponent;
@@ -8,9 +8,8 @@ describe('ItemTypesEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ItemTypesEditComponent]
-    })
-      .compileComponents();
+      imports: [ItemTypesEditComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ItemTypesEditComponent);
     component = fixture.componentInstance;

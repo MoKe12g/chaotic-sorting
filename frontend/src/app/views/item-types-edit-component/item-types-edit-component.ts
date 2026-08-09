@@ -1,30 +1,30 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {take} from 'rxjs';
-import {FormsModule} from '@angular/forms';
-import {ItemType} from '../../relations/item-type';
-import {ItemTypeService} from '../../services/item-type-service';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { ItemType } from '../../relations/item-type';
+import { ItemTypeService } from '../../services/item-type-service';
 
 @Component({
   selector: 'app-item-types-edit-component',
-  imports: [
-    FormsModule
-  ],
+  imports: [FormsModule],
   templateUrl: './item-types-edit-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './item-types-edit-component.css'
+  styleUrl: './item-types-edit-component.css',
 })
 export class ItemTypesEditComponent implements OnInit {
   itemTypeId: number = -1;
   itemType: ItemType;
 
-  constructor(private itemTypeService: ItemTypeService,
-              private route: ActivatedRoute,
-              private router: Router,) {
-    this.itemType = new class implements ItemType {
-      storage_property = "";
+  constructor(
+    private itemTypeService: ItemTypeService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.itemType = new (class implements ItemType {
+      storage_property = '';
       id = -1;
-    };
+    })();
   }
 
   ngOnInit(): void {
@@ -36,12 +36,13 @@ export class ItemTypesEditComponent implements OnInit {
   }
 
   getCategory(categoryId: number) {
-    this.itemTypeService.getItemType(categoryId).pipe(take(1)).subscribe(
-      (response) => {
+    this.itemTypeService
+      .getItemType(categoryId)
+      .pipe(take(1))
+      .subscribe((response) => {
         this.itemType = response;
-        console.log("replaced the item type");
-      }
-    )
+        console.log('replaced the item type');
+      });
   }
 
   logContent() {
@@ -49,43 +50,51 @@ export class ItemTypesEditComponent implements OnInit {
   }
 
   postCategory() {
-    this.itemTypeService.postItemType(this.itemType).pipe(take(1)).subscribe({
-      error: (e) => alert(e.message),
-      next: (response) => {
-        alert("HTTP Patch Request completed");
-        this.itemType = response;
-        this.router.navigate(['/item-type/' + response.id])
-          .then(r => {
+    this.itemTypeService
+      .postItemType(this.itemType)
+      .pipe(take(1))
+      .subscribe({
+        error: (e) => alert(e.message),
+        next: (response) => {
+          alert('HTTP Patch Request completed');
+          this.itemType = response;
+          this.router.navigate(['/item-type/' + response.id]).then((r) => {
             if (!r) {
-              alert("Redirection to categories page didn't work.")
+              alert("Redirection to categories page didn't work.");
             }
           });
-      },
-    });
+        },
+      });
     // TODO: this.categoryService.postCategory()
   }
 
   patchCategory() {
-    this.itemTypeService.patchItemType(this.itemType).pipe(take(1)).subscribe({
-      error: (e) => alert(e.message),
-      next: (response) => {
-        alert("HTTP Patch Request completed");
-        this.itemType = response;
-      },
-    });
+    this.itemTypeService
+      .patchItemType(this.itemType)
+      .pipe(take(1))
+      .subscribe({
+        error: (e) => alert(e.message),
+        next: (response) => {
+          alert('HTTP Patch Request completed');
+          this.itemType = response;
+        },
+      });
   }
 
   deleteCategory() {
-    this.itemTypeService.deleteItemType(this.itemType.id).pipe(take(1)).subscribe({
-      error: (e) => alert(e.message),
-      next: (response) => {
-        alert("HTTP Patch Request completed");
-        this.router.navigate(['/item-types']).then(r => {
-          if (!r) {
-            alert("Redirection to item types page didn't work.")
-          }
-        });
-      },
-    });
+    this.itemTypeService
+      .deleteItemType(this.itemType.id)
+      .pipe(take(1))
+      .subscribe({
+        error: (e) => alert(e.message),
+        next: (response) => {
+          alert('HTTP Patch Request completed');
+          this.router.navigate(['/item-types']).then((r) => {
+            if (!r) {
+              alert("Redirection to item types page didn't work.");
+            }
+          });
+        },
+      });
   }
 }

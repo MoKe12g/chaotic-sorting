@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {TransactionsEditComponent} from './transactions-edit-component';
+import { TransactionsEditComponent } from './transactions-edit-component';
 
 describe('TransactionsEditComponent', () => {
   let component: TransactionsEditComponent;
@@ -8,9 +8,8 @@ describe('TransactionsEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TransactionsEditComponent]
-    })
-      .compileComponents();
+      imports: [TransactionsEditComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TransactionsEditComponent);
     component = fixture.componentInstance;

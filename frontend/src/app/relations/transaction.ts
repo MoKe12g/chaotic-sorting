@@ -1,4 +1,4 @@
-import {DatabaseRelation} from './database-relation';
+import { DatabaseRelation } from './database-relation';
 
 export interface Transaction extends DatabaseRelation {
   allocation_id: number;

@@ -1,6 +1,6 @@
-import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
-import {MenuComponent} from './views/menu-component/menu-component';
-import {RouterOutlet} from '@angular/router';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { MenuComponent } from './views/menu-component/menu-component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,8 @@ import {RouterOutlet} from '@angular/router';
   templateUrl: './app.html',
   //providers: [HttpClient],
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-
 export class App {
   protected readonly title = signal('chaotic-storage-frontend');
 }

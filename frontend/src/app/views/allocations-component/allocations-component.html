@@ -12,7 +12,9 @@
   </tr>
   @for (allocation of data; track allocation.id) {
     <tr>
-      <td><a routerLink="/allocation/{{ allocation.id }}">{{ allocation.id }}</a></td>
+      <td>
+        <a routerLink="/allocation/{{ allocation.id }}">{{ allocation.id }}</a>
+      </td>
       <td>{{ allocation.description }}</td>
       <td>{{ allocation.date_of_entry }}</td>
       <td>{{ allocation.can_be_outside }}</td>
@@ -23,11 +25,13 @@
     No items available.
   }
 </table>
-<hr/>
+<hr />
 <p>
   <strong>
     <p>Shows {{ data.length }} from {{ elementCount }} elements in table {{ table }}.</p>
-    <p>Page {{ page }}
-      (/ {{ Math.ceil(elementCount / entriesPerPage) - 1 }}) with {{ entriesPerPage }} entries per page.</p>
+    <p>
+      Page {{ page }} (/ {{ Math.ceil(elementCount / entriesPerPage) - 1 }}) with
+      {{ entriesPerPage }} entries per page.
+    </p>
   </strong>
 </p>

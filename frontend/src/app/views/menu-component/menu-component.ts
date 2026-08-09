@@ -1,15 +1,11 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu-component',
-  imports: [
-    RouterLink
-  ],
+  imports: [RouterLink],
   templateUrl: './menu-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './menu-component.css'
+  styleUrl: './menu-component.css',
 })
-export class MenuComponent {
-
-}
+export class MenuComponent {}

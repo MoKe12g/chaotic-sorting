@@ -4,10 +4,12 @@ import { take } from 'rxjs';
 import { Transaction } from '../../relations/transaction';
 import { TransactionService } from '../../services/transaction-service';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-transactions-component',
-  imports: [RouterLink, MatTableModule],
+  imports: [RouterLink, MatTableModule, MatPaginator, MatProgressSpinner],
   templateUrl: './transactions-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transactions-component.css',
@@ -15,10 +17,9 @@ import { MatTableModule } from '@angular/material/table';
 export class TransactionsComponent implements OnInit {
   dataSource: Transaction[] = [];
   elementCount: number = -1;
-  table: string = 'no-table';
   page: number = 0;
-  entriesPerPage: number = 64;
-  protected readonly Math = Math;
+  entriesPerPage: number = 25;
+  loaded: boolean = false;
 
   displayedColumns: string[] = ['id', 'allocation', 'item-delta', 'date'];
 
@@ -30,25 +31,29 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.page = this.route.snapshot.params['page'] ?? 0;
 
+    this.updateTableContent();
+  }
+
+  updateTableContent() {
+    this.loaded = false;
     this.transactionService
       .getTransactions(this.entriesPerPage, this.page)
       .pipe(take(1))
       .subscribe((value) => {
         this.dataSource = value;
-        console.log(value);
+        // TODO: Replace with return item, that also gives the entity count back
+        this.transactionService
+          .count()
+          .pipe(take(1))
+          .subscribe(
+            (value) => {
+              this.elementCount = value.count;
+              this.loaded = true;
+            },
+            (error) => {
+              console.error('Failed to load transaction count:', error);
+            },
+          );
       });
-    // TODO: Replace with return item, that also gives the entity count back
-    this.transactionService
-      .count()
-      .pipe(take(1))
-      .subscribe(
-        (value) => {
-          this.table = value.table;
-          this.elementCount = value.count;
-        },
-        (error) => {
-          console.error('Failed to load transaction count:', error);
-        },
-      );
   }
 }

@@ -11,29 +11,35 @@
     <tr>
       <td><label>Place</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="storageBox.place"
-          class="form-control"
-          name="text_place"
-          placeholder="Type the place here"
-          required
-          type="text"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="storageBox.place"
+            class="form-control"
+            name="text_place"
+            placeholder="Type the place here"
+            required
+            type="text"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
       <td><label>Item type</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="storageBox.item_type"
-          class="form-control"
-          name="number_item_type"
-          placeholder="Type the item type here"
-          required
-          type="number"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="storageBox.item_type"
+            class="form-control"
+            name="number_item_type"
+            placeholder="Type the item type here"
+            required
+            type="number"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
@@ -44,17 +50,17 @@
     <tr>
       <td>
         @if (storageBox.id == -1) {
-          <button (click)="postStorageBox()">POST (insert)</button>
+          <button matButton="filled" (click)="postStorageBox()">POST (insert)</button>
         }
       </td>
       <td>
         @if (storageBox.id != -1) {
-          <button (click)="patchStorageBox()">PATCH (update)</button>
+          <button matButton="filled" (click)="patchStorageBox()">PATCH (update)</button>
         }
       </td>
       <td>
         @if (storageBox.id != -1) {
-          <button (click)="deleteStorageBox()">DELETE</button>
+          <button matButton="tonal" (click)="deleteStorageBox()">DELETE</button>
         }
       </td>
     </tr>

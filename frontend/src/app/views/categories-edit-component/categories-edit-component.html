@@ -11,15 +11,18 @@
     <tr>
       <td><label>Comment</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="category.comment"
-          class="form-control"
-          name="text_comment"
-          placeholder="Type your comment here"
-          required
-          type="text"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="category.comment"
+            class="form-control"
+            name="text_comment"
+            placeholder="Type your comment here"
+            required
+            type="text"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
@@ -30,17 +33,17 @@
     <tr>
       <td>
         @if (category.id == -1) {
-          <button (click)="postCategory()">POST (insert)</button>
+          <button matButton="filled" (click)="postCategory()">POST (insert)</button>
         }
       </td>
       <td>
         @if (category.id != -1) {
-          <button (click)="patchCategory()">PATCH (update)</button>
+          <button matButton="filled" (click)="patchCategory()">PATCH (update)</button>
         }
       </td>
       <td>
         @if (category.id != -1) {
-          <button (click)="deleteCategory()">DELETE</button>
+          <button matButton="tonal" (click)="deleteCategory()">DELETE</button>
         }
       </td>
     </tr>

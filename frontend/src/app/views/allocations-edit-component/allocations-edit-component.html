@@ -11,34 +11,40 @@
     <tr>
       <td><label>Description</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="allocation.description"
-          class="form-control"
-          name="text_description"
-          placeholder="Type the description here"
-          required
-          type="text"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="allocation.description"
+            class="form-control"
+            name="text_description"
+            placeholder="Type the description here"
+            required
+            type="text"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
       <td><label>Date</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="allocation.date_of_entry"
-          class="form-control"
-          name="date_of_entry"
-          required
-          type="datetime-local"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="allocation.date_of_entry"
+            class="form-control"
+            name="date_of_entry"
+            required
+            type="datetime-local"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
       <td><label>Can be outside</label></td>
       <td>
-        <input
+        <mat-checkbox
           (input)="logContent()"
           [(ngModel)]="allocation.can_be_outside"
           class="form-control"
@@ -50,29 +56,35 @@
     <tr>
       <td><label>Category</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="allocation.category_id"
-          class="form-control"
-          name="number_category"
-          placeholder="Type the category id here"
-          required
-          type="number"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="allocation.category_id"
+            class="form-control"
+            name="number_category"
+            placeholder="Type the category id here"
+            required
+            type="number"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
       <td><label>Storage Box</label></td>
       <td>
-        <input
-          (input)="logContent()"
-          [(ngModel)]="allocation.storage_box_id"
-          class="form-control"
-          name="number_storage_box_id"
-          placeholder="Type the storage box id here"
-          required
-          type="number"
-        />
+        <mat-form-field>
+          <input
+            matInput
+            (input)="logContent()"
+            [(ngModel)]="allocation.storage_box_id"
+            class="form-control"
+            name="number_storage_box_id"
+            placeholder="Type the storage box id here"
+            required
+            type="number"
+          />
+        </mat-form-field>
       </td>
     </tr>
     <tr>
@@ -83,17 +95,17 @@
     <tr>
       <td>
         @if (allocation.id == -1) {
-          <button (click)="postAllocation()">POST (insert)</button>
+          <button matButton="filled" (click)="postAllocation()">POST (insert)</button>
         }
       </td>
       <td>
         @if (allocation.id != -1) {
-          <button (click)="patchAllocation()">PATCH (update)</button>
+          <button matButton="filled" (click)="patchAllocation()">PATCH (update)</button>
         }
       </td>
       <td>
         @if (allocation.id != -1) {
-          <button (click)="deleteAllocation()">DELETE</button>
+          <button matButton="tonal" (click)="deleteAllocation()">DELETE</button>
         }
       </td>
     </tr>

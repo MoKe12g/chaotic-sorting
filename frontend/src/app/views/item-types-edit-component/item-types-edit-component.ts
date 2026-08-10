@@ -4,10 +4,12 @@ import { take } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { ItemType } from '../../relations/item-type';
 import { ItemTypeService } from '../../services/item-type-service';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-item-types-edit-component',
-  imports: [FormsModule],
+  imports: [FormsModule, MatInput, MatButton, MatFormField],
   templateUrl: './item-types-edit-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './item-types-edit-component.css',

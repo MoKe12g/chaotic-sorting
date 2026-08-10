@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../relations/category';
 import { take } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-categories-edit-component',
-  imports: [FormsModule],
+  imports: [FormsModule, MatInput, MatButton, MatFormField],
   templateUrl: './categories-edit-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './categories-edit-component.css',

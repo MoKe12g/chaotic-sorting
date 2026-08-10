@@ -6,32 +6,57 @@
       {
         "name": "id",
         "ordinal": 0,
-        "type_info": "Integer"
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "id"
+          }
+        }
       },
       {
         "name": "description",
         "ordinal": 1,
-        "type_info": "Text"
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "description"
+          }
+        }
       },
       {
         "name": "date_of_entry",
         "ordinal": 2,
-        "type_info": "Datetime"
+        "type_info": "Datetime",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "date_of_entry"
+          }
+        }
       },
       {
         "name": "can_be_outside",
         "ordinal": 3,
-        "type_info": "Bool"
-      },
-      {
-        "name": "category_id",
-        "ordinal": 4,
-        "type_info": "Integer"
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "can_be_outside"
+          }
+        }
       },
       {
         "name": "storage_box_id",
-        "ordinal": 5,
-        "type_info": "Integer"
+        "ordinal": 4,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "storage_box_id"
+          }
+        }
       }
     ],
     "parameters": {
@@ -42,7 +67,6 @@
       false,
       false,
       true,
-      false,
       false
     ]
   },

@@ -32,7 +32,7 @@ export class StorageBoxesComponent implements OnInit {
   entriesPerPage: number = 25;
   loaded: boolean = false;
 
-  displayedColumns: string[] = ['id', 'place', 'item-type'];
+  displayedColumns: string[] = ['id', 'place'];
 
   constructor(
     private storageBoxService: StorageBoxService,

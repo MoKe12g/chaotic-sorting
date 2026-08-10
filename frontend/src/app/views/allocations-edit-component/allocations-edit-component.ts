@@ -28,7 +28,6 @@ export class AllocationsEditComponent implements OnInit {
       description: string = '';
       date_of_entry: Date = new Date();
       can_be_outside?: boolean = false;
-      category_id: number = -1;
       storage_box_id: number = -1;
       id = -1;
     })();
@@ -65,14 +64,13 @@ export class AllocationsEditComponent implements OnInit {
         next: (response) => {
           alert('HTTP Patch Request completed');
           this.allocation = response;
-          this.router.navigate(['/category/' + response.id]).then((r) => {
+          this.router.navigate(['/allocation/' + response.id]).then((r) => {
             if (!r) {
-              alert("Redirection to categories page didn't work.");
+              alert("Redirection to allocation page didn't work.");
             }
           });
         },
       });
-    // TODO: this.categoryService.postAllocation()
   }
 
   patchAllocation() {
@@ -96,9 +94,9 @@ export class AllocationsEditComponent implements OnInit {
         error: (e) => alert(e.message),
         next: (response) => {
           alert('HTTP Patch Request completed');
-          this.router.navigate(['/categories']).then((r) => {
+          this.router.navigate(['/allocations']).then((r) => {
             if (!r) {
-              alert("Redirection to categories page didn't work.");
+              alert("Redirection to allocations page didn't work.");
             }
           });
         },

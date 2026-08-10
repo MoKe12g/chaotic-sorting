@@ -1,0 +1,74 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT *\n        FROM allocations\n        WHERE 1\n        \n        AND can_be_outside = ?\n        AND description LIKE '%' || ? || '%'\n        ORDER BY id ASC\n        ;",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "name": "description",
+        "ordinal": 1,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "description"
+          }
+        }
+      },
+      {
+        "name": "date_of_entry",
+        "ordinal": 2,
+        "type_info": "Datetime",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "date_of_entry"
+          }
+        }
+      },
+      {
+        "name": "can_be_outside",
+        "ordinal": 3,
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "can_be_outside"
+          }
+        }
+      },
+      {
+        "name": "storage_box_id",
+        "ordinal": 4,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "storage_box_id"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "717fc5629c5955b8a47fd513eec4fa4c416735f33813fc585dd22d73bc567811"
+}

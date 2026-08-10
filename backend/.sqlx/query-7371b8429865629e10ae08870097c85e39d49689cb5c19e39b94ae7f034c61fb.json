@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO allocations (description, date_of_entry, can_be_outside, storage_box_id) VALUES (?1, ?2, ?3, ?4);",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 4
+    },
+    "nullable": []
+  },
+  "hash": "7371b8429865629e10ae08870097c85e39d49689cb5c19e39b94ae7f034c61fb"
+}

@@ -1,0 +1,74 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT *\n        FROM allocations\n        WHERE 1\n        \n        \n        AND description LIKE '%' || ? || '%'\n        ORDER BY id ASC\n        LIMIT ? OFFSET ?;",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "name": "description",
+        "ordinal": 1,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "description"
+          }
+        }
+      },
+      {
+        "name": "date_of_entry",
+        "ordinal": 2,
+        "type_info": "Datetime",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "date_of_entry"
+          }
+        }
+      },
+      {
+        "name": "can_be_outside",
+        "ordinal": 3,
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "can_be_outside"
+          }
+        }
+      },
+      {
+        "name": "storage_box_id",
+        "ordinal": 4,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "storage_box_id"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "bdba0e88e91751f271b9d406356258d338adcefed8d22b727de85d62bbbc4a00"
+}

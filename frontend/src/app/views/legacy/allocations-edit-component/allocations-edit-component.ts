@@ -2,11 +2,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
-import { Allocation } from '../../relations/allocation';
-import { AllocationService } from '../../services/allocation-service';
 import { MatFormField, MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { Allocation } from '../../../relations/allocation';
+import { AllocationService } from '../../../services/allocation-service';
 
 @Component({
   selector: 'app-allocations-edit-component',

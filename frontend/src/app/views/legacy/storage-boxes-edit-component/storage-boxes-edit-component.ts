@@ -2,10 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
-import { StorageBox } from '../../relations/storage-box';
-import { StorageBoxService } from '../../services/storage-box-service';
 import { MatFormField, MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
+import { StorageBox } from '../../../relations/storage-box';
+import { StorageBoxService } from '../../../services/storage-box-service';
 
 @Component({
   selector: 'app-storage-boxes-edit-component',

@@ -1,14 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
-import { StorageBox } from '../../relations/storage-box';
-import { StorageBoxService } from '../../services/storage-box-service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { NgClass } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { StorageBox } from '../../../relations/storage-box';
+import { StorageBoxService } from '../../../services/storage-box-service';
 
 @Component({
   selector: 'app-storage-boxes-component',

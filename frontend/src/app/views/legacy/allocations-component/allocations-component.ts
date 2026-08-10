@@ -1,14 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
-import { Allocation } from '../../relations/allocation';
-import { AllocationService } from '../../services/allocation-service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { NgClass } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { Allocation } from '../../../relations/allocation';
+import { AllocationService } from '../../../services/allocation-service';
 
 @Component({
   selector: 'app-allocations-component',

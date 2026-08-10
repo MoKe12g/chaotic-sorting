@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Transaction } from '../../relations/transaction';
-import { TransactionService } from '../../services/transaction-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { MatFormField, MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
+import { Transaction } from '../../../relations/transaction';
+import { TransactionService } from '../../../services/transaction-service';
 
 @Component({
   selector: 'app-transactions-edit-component',

@@ -1,6 +1,8 @@
-<a routerLink="/category/-1">Create Category</a>
+<button matButton="filled" routerLink="/category/-1">
+  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon> Create Category
+</button>
 
-<p>Categories page {{ page }}</p>
+<h2>Categories</h2>
 @if (loaded) {
   <table mat-table [dataSource]="dataSource">
     <!-- Id Column -->
@@ -16,7 +18,12 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="openCategoryEntry(row)"
+      *matRowDef="let row; let even = even; columns: displayedColumns"
+      [ngClass]="{ evenRow: even }"
+    ></tr>
   </table>
   <mat-paginator
     [length]="elementCount"

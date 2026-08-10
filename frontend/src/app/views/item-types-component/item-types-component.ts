@@ -1,15 +1,26 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { ItemType } from '../../relations/item-type';
 import { ItemTypeService } from '../../services/item-type-service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-item-types-component',
-  imports: [RouterLink, MatTableModule, MatPaginator, MatProgressSpinner],
+  imports: [
+    RouterLink,
+    MatTableModule,
+    MatPaginator,
+    MatProgressSpinner,
+    NgClass,
+    MatButton,
+    MatIcon,
+  ],
   templateUrl: './item-types-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './item-types-component.css',
@@ -26,6 +37,7 @@ export class ItemTypesComponent implements OnInit {
   constructor(
     private itemTypeService: ItemTypeService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +67,9 @@ export class ItemTypesComponent implements OnInit {
             },
           );
       });
+  }
+
+  openItemTypeEntry(itemType: ItemType) {
+    this.router.navigateByUrl('/item-type/' + itemType.id);
   }
 }

@@ -2,14 +2,25 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CategoryService } from '../../services/category-service';
 import { Category } from '../../relations/category';
 import { take } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-categories-component',
-  imports: [RouterLink, MatTableModule, MatPaginator, MatProgressSpinner],
+  imports: [
+    RouterLink,
+    MatTableModule,
+    MatPaginator,
+    MatProgressSpinner,
+    NgClass,
+    MatButton,
+    MatIcon,
+  ],
   templateUrl: './categories-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './categories-component.css',
@@ -26,6 +37,7 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +67,9 @@ export class CategoriesComponent implements OnInit {
             },
           );
       });
+  }
+
+  openCategoryEntry(category: Category) {
+    this.router.navigateByUrl('/category/' + category.id);
   }
 }

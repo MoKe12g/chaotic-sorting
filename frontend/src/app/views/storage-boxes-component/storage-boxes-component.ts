@@ -1,15 +1,26 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { StorageBox } from '../../relations/storage-box';
 import { StorageBoxService } from '../../services/storage-box-service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-storage-boxes-component',
-  imports: [RouterLink, MatTableModule, MatPaginator, MatProgressSpinner],
+  imports: [
+    RouterLink,
+    MatTableModule,
+    MatPaginator,
+    MatProgressSpinner,
+    NgClass,
+    MatButton,
+    MatIcon,
+  ],
   templateUrl: './storage-boxes-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './storage-boxes-component.css',
@@ -26,6 +37,7 @@ export class StorageBoxesComponent implements OnInit {
   constructor(
     private storageBoxService: StorageBoxService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +67,9 @@ export class StorageBoxesComponent implements OnInit {
             },
           );
       });
+  }
+
+  openStorageBoxEntry(storageBox: StorageBox) {
+    this.router.navigateByUrl('/storage-box/' + storageBox.id);
   }
 }

@@ -1,15 +1,26 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { Allocation } from '../../relations/allocation';
 import { AllocationService } from '../../services/allocation-service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-allocations-component',
-  imports: [RouterLink, MatTableModule, MatPaginator, MatProgressSpinner],
+  imports: [
+    RouterLink,
+    MatTableModule,
+    MatPaginator,
+    MatProgressSpinner,
+    NgClass,
+    MatButton,
+    MatIcon,
+  ],
   templateUrl: './allocations-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './allocations-component.css',
@@ -33,6 +44,7 @@ export class AllocationsComponent implements OnInit {
   constructor(
     private allocationService: AllocationService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +74,9 @@ export class AllocationsComponent implements OnInit {
             },
           );
       });
+  }
+
+  openAllocationEntry(allocation: Allocation) {
+    this.router.navigateByUrl('/allocation/' + allocation.id);
   }
 }

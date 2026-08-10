@@ -1,15 +1,26 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { Transaction } from '../../relations/transaction';
 import { TransactionService } from '../../services/transaction-service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-transactions-component',
-  imports: [RouterLink, MatTableModule, MatPaginator, MatProgressSpinner],
+  imports: [
+    RouterLink,
+    MatTableModule,
+    MatPaginator,
+    MatProgressSpinner,
+    NgClass,
+    MatButton,
+    MatIcon,
+  ],
   templateUrl: './transactions-component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transactions-component.css',
@@ -26,6 +37,7 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +67,9 @@ export class TransactionsComponent implements OnInit {
             },
           );
       });
+  }
+
+  openTransactionEntry(transaction: Transaction) {
+    this.router.navigateByUrl('/transaction/' + transaction.id);
   }
 }

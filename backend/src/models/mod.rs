@@ -1,6 +1,11 @@
 pub mod category;
+pub mod category_item;
 pub mod response;
 pub mod storage_box;
+pub mod storage_box_item;
 pub mod allocations;
+pub mod allocations_item;
 pub mod transaction;
+pub mod transaction_item;
 pub mod item_type;
+pub mod item_type_item;

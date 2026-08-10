@@ -1,4 +1,5 @@
 use crate::models::category::Category;
+use crate::models::category_item::CategoryItem;
 use crate::models::response::{EntriesCountResponse, MessageResponse};
 use crate::webapi::api;
 use rocket::response::status::BadRequest;
@@ -12,7 +13,7 @@ pub(crate) async fn get_category(app_state: &State<api::AppState>,
                                  limit: Option<i64>,
                                  page: Option<i64>,
                                  id: Option<i64>,
-                                 comment: Option<String>) -> Result<Json<Vec<Category>>, BadRequest<Json<MessageResponse>>> {
+                                 comment: Option<String>) -> Result<Json<Vec<CategoryItem>>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
 
     // calculate pagination
@@ -45,30 +46,34 @@ pub(crate) async fn get_category(app_state: &State<api::AppState>,
         },
     ).fetch_all(storage_system.get_database()).await {
         Ok(result) => {
-            Ok(Json(result))
+            let result: Vec<Category> = result;
+            Ok(Json(result.into_iter().map(|f| { CategoryItem::from_category(f) }).collect()))
         }
         Err(err) => Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" })))
     }
 }
 
 #[get("/categories/<id>")]
-pub(crate) async fn get_category_by_id(app_state: &State<api::AppState>, id: i64) -> Option<Json<Category>> {
+pub(crate) async fn get_category_by_id(app_state: &State<api::AppState>, id: i64) -> Result<Json<CategoryItem>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
     let category_from_id = Category::from(storage_system, id).await;
     match category_from_id {
         Ok(category_from_id) => {
-            category_from_id.map(Json)
-        }
-        Err(_) => { None }
+            match category_from_id {
+                Some(category_from_id) => { Ok(Json(CategoryItem::from_category(category_from_id))) },
+                None => Err(BadRequest(Json(MessageResponse { message: "Backend returned no value".into() })))
+            }
+        },
+        Err(err) => Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" })))
     }
 }
 
 /// creates entry
 #[post("/categories", data = "<input>")]
-pub async fn post_category(app_state: &State<api::AppState>, input: Json<Category>) -> Result<Json<Category>, BadRequest<Json<MessageResponse>>> {
+pub async fn post_category(app_state: &State<api::AppState>, input: Json<CategoryItem>) -> Result<Json<CategoryItem>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
     match Category::create(storage_system, input.into_inner().comment).await {
-        Ok(result) => { Ok(Json(result)) }
+        Ok(result) => { Ok(Json(CategoryItem::from_category(result))) }
         Err(err) => { Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" }))) }
     }
 }
@@ -76,27 +81,27 @@ pub async fn post_category(app_state: &State<api::AppState>, input: Json<Categor
 /// updates entry
 #[patch("/categories/<id>", data = "<input>")]
 pub async fn patch_category(app_state: &State<api::AppState>, id: i64,
-                            input: Json<Category>) -> Result<Json<Category>, BadRequest<Json<MessageResponse>>> {
+                            input: Json<CategoryItem>) -> Result<Json<CategoryItem>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
     let new_value = Category { id, comment: input.comment.clone() }; // make sure that the id is right inside the struct
     match new_value.update(storage_system).await {
-        Ok(res) if res.rows_affected() > 0 => Ok(Json(new_value)),
+        Ok(res) if res.rows_affected() > 0 => Ok(Json(CategoryItem::from_category(new_value))),
         Ok(_) => Err(BadRequest(Json(MessageResponse { message: "No rows updated".into() }))),
         Err(err) => { Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" }))) }
     }
 }
 
 #[delete("/categories/<id>")]
-pub async fn delete_category(app_state: &State<api::AppState>, id: i64) -> Result<Json<Category>, BadRequest<Json<MessageResponse>>> {
+pub async fn delete_category(app_state: &State<api::AppState>, id: i64) -> Result<Json<CategoryItem>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
     match Category::from(storage_system, id).await {
         Ok(result) => {
             match result {
-                None => { Err(BadRequest(Json(MessageResponse { message: "Cannot find element".to_string() }))) } // BadRequest(Json(MessageResponse { message: "Cannot find id ".to_owned() + &*id.to_string() })))}
+                None => { Err(BadRequest(Json(MessageResponse { message: "Cannot find element".to_string() }))) }
                 Some(result2) => {
                     let category = result2.clone();
                     match result2.delete(storage_system).await {
-                        Ok(_) => { Ok(Json(category)) }
+                        Ok(_) => { Ok(Json(CategoryItem::from_category(category))) }
                         Err(err) => Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" })))
                     }
                 }

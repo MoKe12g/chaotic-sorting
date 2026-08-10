@@ -1,30 +1,38 @@
 <a routerLink="/transaction/-1">Create Transaction</a>
 
 <p>Transactions page {{ page }}</p>
-<table>
-  <tr>
-    <td>Id</td>
-    <td>Allocation</td>
-    <td>Item Delta</td>
-    <td>Date</td>
-  </tr>
-  @for (transaction of data; track transaction.id) {
-    <tr>
-      <td>
-        <a routerLink="/transaction/{{ transaction.id }}">{{ transaction.id }}</a>
-      </td>
-      <td>{{ transaction.allocation_id }}</td>
-      <td>{{ transaction.item_delta }}</td>
-      <td>{{ transaction.date }}</td>
-    </tr>
-  } @empty {
-    No items available.
-  }
+<table mat-table [dataSource]="dataSource">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Allocation Column -->
+  <ng-container matColumnDef="allocation">
+    <th mat-header-cell *matHeaderCellDef>Allocation</th>
+    <td mat-cell *matCellDef="let element">{{ element.allocation_id }}</td>
+  </ng-container>
+
+  <!-- Item Delta Column -->
+  <ng-container matColumnDef="item-delta">
+    <th mat-header-cell *matHeaderCellDef>Item Delta</th>
+    <td mat-cell *matCellDef="let element">{{ element.item_delta }}</td>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 <hr />
 <p>
   <strong>
-    <p>Shows {{ data.length }} from {{ elementCount }} elements in table {{ table }}.</p>
+    <p>Shows {{ dataSource.length }} from {{ elementCount }} elements in table {{ table }}.</p>
     <p>
       Page {{ page }} (/ {{ Math.ceil(elementCount / entriesPerPage) - 1 }}) with
       {{ entriesPerPage }} entries per page.

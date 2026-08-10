@@ -1,26 +1,26 @@
 <a routerLink="/item-type/-1">Create ItemType</a>
 
 <p>ItemTypes page {{ page }}</p>
-<table>
-  <tr>
-    <td>Id</td>
-    <td>Storage Property</td>
-  </tr>
-  @for (itemType of data; track itemType.id) {
-    <tr>
-      <td>
-        <a routerLink="/item-type/{{ itemType.id }}">{{ itemType.id }}</a>
-      </td>
-      <td>{{ itemType.storage_property }}</td>
-    </tr>
-  } @empty {
-    No items available.
-  }
+<table mat-table [dataSource]="dataSource">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Storage Property Column -->
+  <ng-container matColumnDef="storage-property">
+    <th mat-header-cell *matHeaderCellDef>Storage Property</th>
+    <td mat-cell *matCellDef="let element">{{ element.storage_property }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 <hr />
 <p>
   <strong>
-    <p>Shows {{ data.length }} from {{ elementCount }} elements in table {{ table }}.</p>
+    <p>Shows {{ dataSource.length }} from {{ elementCount }} elements in table {{ table }}.</p>
     <p>
       Page {{ page }} (/ {{ Math.ceil(elementCount / entriesPerPage) - 1 }}) with
       {{ entriesPerPage }} entries per page.

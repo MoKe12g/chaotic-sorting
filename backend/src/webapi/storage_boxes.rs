@@ -8,13 +8,12 @@ use rocket::{delete, get, patch, post, State};
 use sqlx::query_as;
 use sqlx_conditional_queries::conditional_query_as;
 
-#[get("/storage_boxes?<limit>&<page>&<id>&<place>&<item_type>")]
+#[get("/storage_boxes?<limit>&<page>&<id>&<place>")]
 pub(crate) async fn get_storage_box(app_state: &State<api::AppState>,
                                     limit: Option<i64>,
                                     page: Option<i64>,
                                     id: Option<i64>,
-                                    place: Option<String>,
-                                    item_type: Option<i64>) -> Result<Json<Vec<StorageBoxItem>>, BadRequest<Json<MessageResponse>>> {
+                                    place: Option<String>) -> Result<Json<Vec<StorageBoxItem>>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
 
     // calculate pagination
@@ -28,7 +27,6 @@ pub(crate) async fn get_storage_box(app_state: &State<api::AppState>,
         WHERE 1
         {#id}
         {#place}
-        {#item_type}
         ORDER BY id ASC
         {#pagination};"#,
         #id = match id.as_ref() {
@@ -39,11 +37,6 @@ pub(crate) async fn get_storage_box(app_state: &State<api::AppState>,
         #place = match place.as_ref() {
             Some(_) =>
                 "AND place LIKE '%' || {place} || '%'",
-            None => "",
-        },
-        #item_type = match item_type.as_ref() {
-            Some(_) =>
-                "AND item_type = {item_type}",
             None => "",
         },
         #pagination = match limit {
@@ -80,7 +73,7 @@ pub(crate) async fn get_storage_box_by_id(app_state: &State<api::AppState>, id: 
 pub async fn post_storage_box(app_state: &State<api::AppState>, input: Json<StorageBoxItem>) -> Result<Json<StorageBoxItem>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
     // TODO: Is there a better way than to just discard the given id?
-    match StorageBox::create(storage_system, input.place.clone(), input.item_type).await {
+    match StorageBox::create(storage_system, input.place.clone()).await {
         Ok(result) => { Ok(Json(StorageBoxItem::from_storage_box(result))) }
         Err(err) => { Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" }))) }
     }
@@ -91,7 +84,7 @@ pub async fn post_storage_box(app_state: &State<api::AppState>, input: Json<Stor
 pub async fn patch_storage_box(app_state: &State<api::AppState>, id: i64,
                                input: Json<StorageBoxItem>) -> Result<Json<StorageBoxItem>, BadRequest<Json<MessageResponse>>> {
     let storage_system = app_state.get_storage_system();
-    let new_value = StorageBox { id, place: input.place.clone(), item_type: input.item_type }; // make sure that the id is right inside the struct
+    let new_value = StorageBox { id, place: input.place.clone() }; // make sure that the id is right inside the struct
     match new_value.update(&storage_system).await {
         Ok(res) if res.rows_affected() > 0 => Ok(Json(StorageBoxItem::from_storage_box(new_value))),
         Ok(_) => Err(BadRequest(Json(MessageResponse { message: "No rows updated".into() }))),

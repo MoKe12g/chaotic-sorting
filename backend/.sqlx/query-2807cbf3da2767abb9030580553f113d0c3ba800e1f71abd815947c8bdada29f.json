@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO storage_boxes (place) VALUES (?1);",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "2807cbf3da2767abb9030580553f113d0c3ba800e1f71abd815947c8bdada29f"
+}

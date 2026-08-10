@@ -27,14 +27,14 @@ impl Allocation {
     }
 
     pub async fn insert(storage_system: &StorageSystem, description: String, date_of_entry: NaiveDateTime,
-                        can_be_outside: Option<bool>, category_id: i64, storage_box_id: i64) -> Result<Self, Box<dyn Error + Send + Sync>> {
-        Self::create(storage_system, description, date_of_entry, can_be_outside, category_id, storage_box_id).await
+                        can_be_outside: Option<bool>, storage_box_id: i64) -> Result<Self, Box<dyn Error + Send + Sync>> {
+        Self::create(storage_system, description, date_of_entry, can_be_outside, storage_box_id).await
     }
 
     pub async fn create(storage_system: &StorageSystem, description: String, date_of_entry: NaiveDateTime,
-                        can_be_outside: Option<bool>, category_id: i64, storage_box_id: i64) -> Result<Self, Box<dyn Error + Send + Sync>> {
-        let result = sqlx::query!("INSERT INTO allocations (description, date_of_entry, can_be_outside, category_id, storage_box_id) VALUES (?1, ?2, ?3, ?4, ?5);",
-        description, date_of_entry, can_be_outside, category_id, storage_box_id).execute(storage_system.get_database()).await?;
+                        can_be_outside: Option<bool>, storage_box_id: i64) -> Result<Self, Box<dyn Error + Send + Sync>> {
+        let result = sqlx::query!("INSERT INTO allocations (description, date_of_entry, can_be_outside, storage_box_id) VALUES (?1, ?2, ?3, ?4);",
+        description, date_of_entry, can_be_outside, storage_box_id).execute(storage_system.get_database()).await?;
         let id = result.last_insert_rowid();
         match Self::from(storage_system, id).await {
             Ok(result) => {
@@ -52,8 +52,8 @@ impl Allocation {
     }
 
     pub async fn update_record(storage_system: &StorageSystem, id: i64, allocation: &Allocation) -> Result<SqliteQueryResult, Box<dyn Error + Send + Sync>> {
-        match sqlx::query!("UPDATE allocations SET description == ?1, date_of_entry == ?3, can_be_outside == ?4, category_id == ?5, storage_box_id == ?6 WHERE id == ?2;",
-            allocation.description, id, allocation.date_of_entry, allocation.can_be_outside, allocation.category_id, allocation.storage_box_id).execute(storage_system.get_database()).await {
+        match sqlx::query!("UPDATE allocations SET description == ?1, date_of_entry == ?3, can_be_outside == ?4, storage_box_id == ?5 WHERE id == ?2;",
+            allocation.description, id, allocation.date_of_entry, allocation.can_be_outside, allocation.storage_box_id).execute(storage_system.get_database()).await {
             Ok(result) => { Ok(result) }
             Err(err) => { Err(err.into()) }
         }

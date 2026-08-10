@@ -1,0 +1,74 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT *\n        FROM allocations\n        WHERE 1\n        AND storage_box_id = ?\n        \n        \n        ORDER BY id ASC\n        ;",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "name": "description",
+        "ordinal": 1,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "description"
+          }
+        }
+      },
+      {
+        "name": "date_of_entry",
+        "ordinal": 2,
+        "type_info": "Datetime",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "date_of_entry"
+          }
+        }
+      },
+      {
+        "name": "can_be_outside",
+        "ordinal": 3,
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "can_be_outside"
+          }
+        }
+      },
+      {
+        "name": "storage_box_id",
+        "ordinal": 4,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "allocations",
+            "name": "storage_box_id"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "307d0190f75df69f8f0c641edabef0abc1e22296b5c56d3627bcf6b8f3727b33"
+}

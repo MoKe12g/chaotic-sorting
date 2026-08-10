@@ -25,7 +25,6 @@ export class StorageBoxesEditComponent implements OnInit {
   ) {
     this.storageBox = new (class implements StorageBox {
       place: string = '';
-      item_type: number = -1;
       id = -1;
     })();
   }

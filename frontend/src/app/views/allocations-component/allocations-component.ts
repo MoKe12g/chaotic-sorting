@@ -32,14 +32,7 @@ export class AllocationsComponent implements OnInit {
   entriesPerPage: number = 25;
   loaded: boolean = false;
 
-  displayedColumns: string[] = [
-    'id',
-    'description',
-    'date',
-    'can-be-outside',
-    'category',
-    'storage-box',
-  ];
+  displayedColumns: string[] = ['id', 'description', 'date', 'can-be-outside', 'storage-box'];
 
   constructor(
     private allocationService: AllocationService,

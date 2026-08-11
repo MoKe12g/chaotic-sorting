@@ -7,6 +7,7 @@ use rocket::serde::json::Json;
 use rocket::{State, delete, get, patch, post};
 use sqlx::query_as;
 use sqlx_conditional_queries::conditional_query_as;
+use crate::models::multi_query::MultiQuery;
 
 #[get("/allocations?<limit>&<page>&<storage_box_id>&<can_be_outside>&<description>")]
 pub(crate) async fn get_allocation(app_state: &State<api::AppState>,
@@ -74,6 +75,22 @@ pub(crate) async fn get_allocation_by_id(app_state: &State<api::AppState>, id: i
         Err(err) => Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" })))
     }
 }
+
+/* not possible because I cannot add a Array of numbers to the sqlx query
+/// multi get
+#[post("/allocations-multi", data = "<ids>")]
+pub(crate) async fn multi_get(app_state: &State<api::AppState>, ids: Json<MultiQuery>) -> Result<Json<Vec<AllocationItem>>, BadRequest<Json<MessageResponse>>> {
+    let storage_system = app_state.get_storage_system();
+    match sqlx::query_as!(Allocation,
+            "SELECT * from allocations where id in (?1)", ids.ids).fetch_all(storage_system.get_database()).await {
+        Ok(result) => {
+            let result: Vec<Allocation> = result;
+            Ok(Json(result.into_iter().map(|f| { AllocationItem::from_allocation(f) }).collect()))
+        }
+        Err(err) => Err(BadRequest(Json(MessageResponse { message: err.to_string() + " from backend" })))
+    }
+}
+*/
 
 /// creates entry
 #[post("/allocations", data = "<input>")]

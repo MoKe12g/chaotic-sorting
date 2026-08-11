@@ -26,6 +26,7 @@ impl API {
                     storage_boxes::count_storage_box_entries,
                     allocations::get_allocation,
                     allocations::get_allocation_by_id,
+                    //allocations::multi_get,
                     allocations::patch_allocation,
                     allocations::delete_allocation,
                     allocations::post_allocation,

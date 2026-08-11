@@ -6,20 +6,24 @@ import { StorageBoxesEditComponent } from './views/legacy/storage-boxes-edit-com
 import { TransactionsComponent } from './views/legacy/transactions-component/transactions-component';
 import { TransactionsEditComponent } from './views/legacy/transactions-edit-component/transactions-edit-component';
 import { DashboardComponent } from './views/dashboard-component/dashboard-component';
+import { AllocationOverviewComponent } from './views/allocation-overview/allocation-overview-component';
 
 export const routes: Routes = [
+  // dashboard
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  // storage box
+  // legacy storage box
   { path: 'storage-box/:id', component: StorageBoxesEditComponent },
   { path: 'storage-boxes', component: StorageBoxesComponent },
   { path: 'storage-boxes/:page', component: StorageBoxesComponent },
-  // allocation
+  // legacy allocation
   { path: 'allocation/:id', component: AllocationsEditComponent },
   { path: 'allocations', component: AllocationsComponent },
   { path: 'allocations/:page', component: AllocationsComponent },
-  // transaction
+  // legacy transaction
   { path: 'transaction/:id', component: TransactionsEditComponent },
   { path: 'transactions', component: TransactionsComponent },
   { path: 'transactions/:page', component: TransactionsComponent },
+  // v2 allocations overview
+  { path: 'v2/allocation/:id', component: AllocationOverviewComponent },
 ];

@@ -25,22 +25,11 @@ create table temp_transactions
 insert into new_storage_boxes select id, place from storage_boxes;
 insert into new_allocations select id, description, date_of_entry, can_be_outside, storage_box_id from allocations;
 insert into temp_transactions select id, allocation_id, item_delta, date from transactions;
---drop table transactions;
 drop table allocations;
 drop table storage_boxes;
 drop table categories;
 drop table item_types;
 ALTER TABLE new_storage_boxes RENAME TO storage_boxes;
 ALTER TABLE new_allocations RENAME TO allocations;
---create table transactions
---(
---    id            INTEGER PRIMARY KEY not null,
---    allocation_id INTEGER             not null,
---    item_delta    integer             not null,
---    date          datetime            not null,
---    FOREIGN KEY (allocation_id) REFERENCES allocations (id)
---);
---insert into transactions select id, allocation_id, item_delta, date from temp_transactions;
---drop table temp_transactions;
 PRAGMA defer_foreign_keys = OFF;
 PRAGMA foreign_keys = TRUE;

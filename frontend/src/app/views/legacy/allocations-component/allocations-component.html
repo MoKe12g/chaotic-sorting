@@ -1,0 +1,54 @@
+<button matButton="filled" routerLink="/allocation/-1">
+  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon> Create Allocation
+</button>
+
+<h2>Allocations</h2>
+@if (loaded) {
+  <table mat-table [dataSource]="dataSource">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.date_of_entry }}</td>
+    </ng-container>
+
+    <!-- Can be outside Column -->
+    <ng-container matColumnDef="can-be-outside">
+      <th mat-header-cell *matHeaderCellDef>Can be outside</th>
+      <td mat-cell *matCellDef="let element">{{ element.can_be_outside }}</td>
+    </ng-container>
+
+    <!-- StorageBox Column -->
+    <ng-container matColumnDef="storage-box">
+      <th mat-header-cell *matHeaderCellDef>Storage Box</th>
+      <td mat-cell *matCellDef="let element">{{ element.storage_box_id }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="openAllocationEntry(row)"
+      *matRowDef="let row; let even = even; columns: displayedColumns"
+      [ngClass]="{ evenRow: even }"
+    ></tr>
+  </table>
+  <mat-paginator
+    [length]="elementCount"
+    [pageSize]="entriesPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="updateTableContent()"
+  />
+} @else {
+  <mat-progress-spinner mode="indeterminate" />
+}

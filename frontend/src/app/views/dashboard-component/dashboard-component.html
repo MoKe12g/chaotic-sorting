@@ -1,6 +1,27 @@
-<p>Statistics</p>
+<button matButton="tonal">New</button><button matButton="tonal">Transactions</button
+><button matButton="tonal">Items</button>
+<br />
+<input matInput />
+<br />
+@if (allocations != null && colCount != -1) {
+  <mat-grid-list [cols]="colCount" rowHeight="2:1">
+    @for (allocation of allocations; track allocation) {
+      <mat-grid-tile (click)="onAllocationClick(allocation.id)">{{
+        allocation.description
+      }}</mat-grid-tile>
+    }
+  </mat-grid-list>
+  <mat-paginator
+    [length]="allocationCount"
+    [pageSize]="itemsPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100, 200, 250, 500, 1000]"
+    (page)="handlePageEvent($event)"
+  />
+} @else {
+  <mat-progress-spinner mode="indeterminate" />
+}
+
+<h2>Statistics</h2>
 <p>Allocations: {{ allocationCount }}</p>
-<p>Categories: {{ categoryCount }}</p>
-<p>Item Types: {{ itemTypeCount }}</p>
 <p>Storage Boxes: {{ storageBoxCount }}</p>
 <p>Transactions: {{ transactionCount }}</p>

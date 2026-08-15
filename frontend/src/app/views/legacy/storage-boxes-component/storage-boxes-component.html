@@ -1,0 +1,36 @@
+<button matButton="filled" routerLink="/storage-box/-1">
+  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon> Create Storage Box
+</button>
+
+<h2>Storage Boxes</h2>
+@if (loaded) {
+  <table mat-table [dataSource]="dataSource">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- Place Column -->
+    <ng-container matColumnDef="place">
+      <th mat-header-cell *matHeaderCellDef>Place</th>
+      <td mat-cell *matCellDef="let element">{{ element.place }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="openStorageBoxEntry(row)"
+      *matRowDef="let row; let even = even; columns: displayedColumns"
+      [ngClass]="{ evenRow: even }"
+    ></tr>
+  </table>
+  <mat-paginator
+    [length]="elementCount"
+    [pageSize]="entriesPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="updateTableContent()"
+  />
+} @else {
+  <mat-progress-spinner mode="indeterminate" />
+}

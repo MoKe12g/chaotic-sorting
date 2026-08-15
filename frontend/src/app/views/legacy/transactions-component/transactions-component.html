@@ -1,0 +1,48 @@
+<button matButton="filled" routerLink="/transaction/-1">
+  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon> Create Transaction
+</button>
+
+<h2>Transactions</h2>
+@if (loaded) {
+  <table mat-table [dataSource]="dataSource">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- Allocation Column -->
+    <ng-container matColumnDef="allocation">
+      <th mat-header-cell *matHeaderCellDef>Allocation</th>
+      <td mat-cell *matCellDef="let element">{{ element.allocation_id }}</td>
+    </ng-container>
+
+    <!-- Item Delta Column -->
+    <ng-container matColumnDef="item-delta">
+      <th mat-header-cell *matHeaderCellDef>Item Delta</th>
+      <td mat-cell *matCellDef="let element">{{ element.item_delta }}</td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="openTransactionEntry(row)"
+      *matRowDef="let row; let even = even; columns: displayedColumns"
+      [ngClass]="{ evenRow: even }"
+    ></tr>
+  </table>
+  <mat-paginator
+    [length]="elementCount"
+    [pageSize]="entriesPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="updateTableContent()"
+  />
+} @else {
+  <mat-progress-spinner mode="indeterminate" />
+}

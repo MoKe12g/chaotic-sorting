@@ -1,5 +1,5 @@
 use crate::storage_system::storage_system::StorageSystem;
-use crate::webapi::{allocations, categories, high_level, item_type, storage_boxes, transactions};
+use crate::webapi::{allocations, high_level, storage_boxes, transactions};
 use rocket::{routes, Error, Ignite, Rocket};
 
 pub struct API
@@ -18,12 +18,6 @@ impl API {
             .mount(
                 "/",
                 routes![
-                    categories::get_category,
-                    categories::get_category_by_id,
-                    categories::patch_category,
-                    categories::delete_category,
-                    categories::post_category,
-                    categories::count_category_entries,
                     storage_boxes::get_storage_box,
                     storage_boxes::get_storage_box_by_id,
                     storage_boxes::patch_storage_box,
@@ -32,6 +26,7 @@ impl API {
                     storage_boxes::count_storage_box_entries,
                     allocations::get_allocation,
                     allocations::get_allocation_by_id,
+                    //allocations::multi_get,
                     allocations::patch_allocation,
                     allocations::delete_allocation,
                     allocations::post_allocation,
@@ -42,12 +37,6 @@ impl API {
                     transactions::delete_transaction,
                     transactions::post_transaction,
                     transactions::count_transaction_entries,
-                    item_type::get_item_type,
-                    item_type::get_item_type_by_id,
-                    item_type::patch_item_type,
-                    item_type::delete_item_type,
-                    item_type::post_item_type,
-                    item_type::count_item_type_entries,
                     
                     high_level::sum_transaction_items_for_allocation,
                     ],

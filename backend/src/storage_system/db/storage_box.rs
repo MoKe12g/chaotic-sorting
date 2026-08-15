@@ -25,12 +25,12 @@ impl StorageBox {
             .fetch_optional(storage_system.get_database()).await.map_err(|e| e.into())
     }
 
-    pub async fn insert(storage_system: &StorageSystem, place: String, item_type: i64) -> Result<Self, Box<dyn Error + Send + Sync>> {
-        Self::create(storage_system, place, item_type).await
+    pub async fn insert(storage_system: &StorageSystem, place: String) -> Result<Self, Box<dyn Error + Send + Sync>> {
+        Self::create(storage_system, place).await
     }
 
-    pub async fn create(storage_system: &StorageSystem, place: String, item_type: i64) -> Result<Self, Box<dyn Error + Send + Sync>> {
-        let result = sqlx::query!("INSERT INTO storage_boxes (place, item_type) VALUES (?1, ?2);", place, item_type).execute(storage_system.get_database()).await?;
+    pub async fn create(storage_system: &StorageSystem, place: String) -> Result<Self, Box<dyn Error + Send + Sync>> {
+        let result = sqlx::query!("INSERT INTO storage_boxes (place) VALUES (?1);", place).execute(storage_system.get_database()).await?;
         let id = result.last_insert_rowid();
         match Self::from(storage_system, id).await {
             Ok(result) => {
@@ -48,7 +48,7 @@ impl StorageBox {
     }
 
     pub async fn update_record(storage_system: &StorageSystem, id: i64, storage_box: &StorageBox) -> Result<SqliteQueryResult, Box<dyn Error + Send + Sync>> {
-        match sqlx::query!("UPDATE storage_boxes SET place = ?1, item_type = ?3 WHERE id == ?2;", storage_box.place, id, storage_box.item_type).execute(storage_system.get_database()).await {
+        match sqlx::query!("UPDATE storage_boxes SET place = ?1 WHERE id == ?2;", storage_box.place, id).execute(storage_system.get_database()).await {
             Ok(result) => { Ok(result) }
             Err(err) => { Err(err.into()) }
         }

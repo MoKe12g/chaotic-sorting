@@ -1,0 +1,20 @@
+Loaded {{ allocations.length }} allocations
+
+@if (storageBoxes != null && colCount != -1 && loaded) {
+  <mat-grid-list [cols]="colCount" rowHeight="2:1">
+    @for (storageBox of storageBoxes; track storageBox) {
+      <mat-grid-tile (click)="onStorageBoxClick(storageBox.id)">
+        <p>{{ storageBox.id }}</p>
+        <p>{{ storageBox.place }}</p>
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
+  <mat-paginator
+    [length]="storageBoxCount"
+    [pageSize]="itemsPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100, 200, 250, 500, 1000]"
+    (page)="handlePageEvent($event)"
+  />
+} @else {
+  <mat-progress-spinner mode="indeterminate" />
+}

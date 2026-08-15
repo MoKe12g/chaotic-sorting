@@ -17,12 +17,30 @@ export class AllocationService {
     return this.http.get<Allocation>(this.apiUrl + '/allocations/' + id);
   }
 
-  // multi get
-  getAllocations(limit: number, page: number): Observable<Allocation[]> {
+  // filtered and paginated
+  getAllocations(
+    limit: number,
+    page: number,
+    storage_box_id?: number,
+    can_be_outside?: boolean,
+    description?: string,
+  ): Observable<Allocation[]> {
+    let parameters: string = '';
+    if (storage_box_id) parameters += '&storage_box_id=' + storage_box_id;
+    if (can_be_outside) parameters += '&can_be_outside=' + can_be_outside;
+    if (description) parameters += '&description=' + description;
+    console.log(this.apiUrl + '/allocations?limit=' + limit + '&page=' + page + '' + parameters);
     return this.http.get<Allocation[]>(
-      this.apiUrl + '/allocations?limit=' + limit + '&page=' + page + '',
+      this.apiUrl + '/allocations?limit=' + limit + '&page=' + page + '' + parameters,
     );
   }
+
+  /* not possible because I cannot add a Array of numbers to the sqlx query
+  multiGetAllocations(ids: number[]): Observable<Allocation[]> {
+    const query: MultiQuery = { ids };
+    return this.http.post<Allocation[]>(this.apiUrl + '/allocations-multi', query);
+  }
+  */
 
   // post or insert
   postAllocation(Allocation: Allocation): Observable<Allocation> {
